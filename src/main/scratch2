@@ -1,0 +1,7 @@
+public void sendTo(final BiConsumer<String, Runnable> someApiFunction){
+		someApiFunction.accept(this.name, this.func);
+	}
+
+	EBehaviors.Fly.sendTo(redheadDuck.behaviors::add);
+
+	public void add(final String behaveName, final T behaveFunc ){

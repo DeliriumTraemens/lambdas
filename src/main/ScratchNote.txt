@@ -1,0 +1,56 @@
+
+public void add(final String behaveName, final T behaveFunc) {
+        this.assertContainsNameNot(behaveName);
+        BehaviorRegistry.assertArgNotNull(behaveFunc);
+        this.map.put(behaveName, behaveFunc);
+    }
+
+    public boolean contains(final String behaveName) {
+        BehaviorRegistry.assertArgNotNull(behaveName);
+        this.assertMapNotNull();
+        return this.map.containsKey(behaveName) && (this.map.get(behaveName) != null);
+    }
+
+    public T get(final String behaveName) {
+        this.assertContainsName(behaveName);
+        return this.map.get(behaveName);
+    }
+
+    public void replace(final String behaveName, final T behaveFunc) {
+        this.assertContainsName(behaveName);
+        BehaviorRegistry.assertArgNotNull(behaveFunc);
+        this.map.put(behaveName, behaveFunc);
+    }
+
+    public void remove(final String behaveName) {
+        this.assertContainsName(behaveName);
+        this.map.remove(behaveName);
+    }
+
+
+
+protected void assertContainsName(final String behaveName) {
+        BehaviorRegistry.assertArgNotNull(behaveName);
+        this.assertMapNotNull();
+        if (!this.contains(behaveName)) {
+            throw new RuntimeException("Способность \"" + behaveName + "\" не зарегистрирована.");
+        }
+    }
+
+    protected void assertContainsNameNot(final String behaveName) {
+        BehaviorRegistry.assertArgNotNull(behaveName);
+        this.assertMapNotNull();
+        if (this.contains(behaveName)) {
+            throw new RuntimeException("Способность \"" + behaveName + "\" уже зарегистрирована.");
+        }
+    }
+
+    protected void assertMapNotNull() {
+        if (this.map == null) throw new RuntimeException("Отсутствует map.");
+    }
+
+     public boolean contains(final String behaveName) {
+            BehaviorRegistry.assertArgNotNull(behaveName);
+            this.assertMapNotNull();
+            return this.map.containsKey(behaveName) && (this.map.get(behaveName) != null);
+        }
